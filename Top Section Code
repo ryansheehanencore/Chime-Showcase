@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Talking Points</title>
+
+  <style>
+    .font-size-controls {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: transparent;
+      padding: 8px 0 12px;
+      text-align: right;
+    }
+
+    .font-size-controls button {
+      background: none;
+      border: none;
+      padding: 0;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    .font-size-controls i {
+      font-size: 50px;
+      color: white;
+      opacity: 0.5;
+    }
+
+    .showcase-talking-points {
+      --talking-point-size: 18px;
+      font-size: var(--talking-point-size);
+      background: #1F1646;
+      padding: 16px;
+      line-height: 1.5;
+      width: 100%;
+      max-height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      box-sizing: border-box;
+    }
+
+    .showcase-talking-points.size-small {
+      --talking-point-size: 16px;
+    }
+
+    .showcase-talking-points.size-medium {
+      --talking-point-size: 18px;
+    }
+
+    .showcase-talking-points.size-large {
+      --talking-point-size: 22px;
+    }
+
+    .showcase-talking-points h1 {
+      font-size: 1.5em;
+      margin-bottom: 12px;
+    }
+
+    .showcase-talking-points h2 {
+      font-size: 1.5em;
+      margin-top: 24px;
+      margin-bottom: 8px;
+    }
+
+    .showcase-talking-points ul {
+      margin-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    .showcase-talking-points li {
+      margin-bottom: 8px;
+    }
+
+    .showcase-talking-points details {
+      margin-top: 16px;
+    }
+
+    .showcase-talking-points summary {
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 4px;
+      transform-origin: left center;
+      --step: 0.1s;
+      animation: productPulse 1s ease-in-out 1;
+      animation-delay: 0.8s;
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .showcase-talking-points details:nth-of-type(1) summary {
+      animation-delay: calc(0.8s + var(--step) * 0);
+    }
+
+    .showcase-talking-points details:nth-of-type(2) summary {
+      animation-delay: calc(0.8s + var(--step) * 1);
+    }
+
+    .showcase-talking-points details:nth-of-type(3) summary {
+      animation-delay: calc(0.8s + var(--step) * 2);
+    }
+
+    .showcase-talking-points details:nth-of-type(4) summary {
+      animation-delay: calc(0.8s + var(--step) * 3);
+    }
+
+    .showcase-talking-points details:nth-of-type(5) summary {
+      animation-delay: calc(0.8s + var(--step) * 4);
+    }
+
+    .showcase-talking-points details:nth-of-type(6) summary {
+      animation-delay: calc(0.8s + var(--step) * 5);
+    }
+
+    .showcase-talking-points details:nth-of-type(7) summary {
+      animation-delay: calc(0.8s + var(--step) * 6);
+    }
+
+    @keyframes productPulse {
+      0%, 100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+
+      15% {
+        transform: translateX(6px);
+        opacity: 0.85;
+      }
+
+      30% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .showcase-talking-points hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 20px 0;
+    }
+
+    .showcase-talking-points .instruction {
+      text-align: center;
+      animation: instructionBlink 1.6s ease-in-out 1 forwards;
+      animation-delay: 3s;
+    }
+
+    @keyframes instructionBlink {
+      0% { opacity: 1; }
+      15% { opacity: 0; }
+      30% { opacity: 1; }
+      45% { opacity: 0; }
+      60% { opacity: 1; }
+      100% { opacity: 1; }
+    }
+
+    .showcase-talking-points summary::after {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%) rotate(0deg);
+      transition: transform 0.2s ease;
+    }
+
+    .showcase-talking-points details[open] summary::after {
+      transform: translateY(-50%) rotate(90deg);
+    }
+  </style>
+</head>
+
+<body>
+
+  <script>
+    const sizes = ['size-small', 'size-medium', 'size-large'];
+    let current = 1;
+
+    function changeFontSize(direction) {
+      const page = document.querySelector('.showcase-talking-points');
+
+      current += direction;
+
+      if (current < 0) current = 0;
+      if (current > sizes.length - 1) current = sizes.length - 1;
+
+      page.classList.remove(...sizes);
+      page.classList.add(sizes[current]);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelector('.showcase-talking-points')
+        .classList.add(sizes[current]);
+    });
+  </script>
+
+  <div class="showcase-talking-points">
+
+    <div class="font-size-controls">
+      <button onclick="changeFontSize(-1)">
+        <i class="icons8-minus"></i>
+      </button>
+      <button onclick="changeFontSize(1)">
+        <i class="icons8-plus"></i>
+      </button>
+    </div>
